@@ -6,7 +6,7 @@ Component({
   },
 
   data: {
-    showSubBtn: true
+    showMenu: true
   },
   attached: function () {
     this.setData({
@@ -17,7 +17,7 @@ Component({
     // 点击新建按钮
     onCreateTap: function () {
       this.setData({
-        showSubBtn: !this.data.showSubBtn
+        showMenu: !this.data.showMenu
       })
     },
     // 点击展开的单个按钮

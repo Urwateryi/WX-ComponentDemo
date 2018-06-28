@@ -1,5 +1,5 @@
 {
   "usingComponents": {
-    "createbutton": "/components/createbutton"
+    "menu": "/components/menu"
   }
 }

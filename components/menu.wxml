@@ -1,5 +1,5 @@
 <view class='container'>
-  <view hidden="{{showSubBtn?false:true}}" class='sub-btn-container'>
+  <view hidden="{{showMenu?false:true}}" class='sub-btn-container'>
     <block wx:for='{{menu_list}}' wx:key='index'>
       <view class='sub-btns' catchtap='onItemTap' data-item='{{item}}'>
         <image class='btn' src='{{item.src}}' />
