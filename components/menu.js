@@ -8,6 +8,7 @@ Component({
   data: {
     showMenu: true
   },
+  
   attached: function () {
     this.setData({
       menu_list: this.data.menu_list
