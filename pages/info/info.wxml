@@ -1,0 +1,6 @@
+<view>
+  <createbutton class='createbutton' menu_list='{{menu_list}}' />
+  <text class='text' >
+    INFO
+  </text>
+</view>

@@ -1,0 +1,14 @@
+createbutton{
+  position: absolute;
+  bottom: 50rpx;
+  right: 50rpx;
+}
+
+text{
+    font-family: MicroSoft Yahei;
+      color: #777;
+}
+
+page{
+  background-color: #f2f2f2;
+}

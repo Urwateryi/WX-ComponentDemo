@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100rpx;
+  height: auto;
+}
+
+.btn {
+  width: 100rpx;
+  height: 100rpx;
+  margin: auto;
+}
+
+.sub-btns {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20rpx;
+}
+
+.sub-btn-container {
+  margin-bottom: 60rpx;
+}
+
+.sub-btn__name {
+  font-size: 22rpx;
+  margin: auto;
+  vertical-align: middle;
+}
+
+page {
+  height: 100%;
+}

@@ -1,0 +1,5 @@
+App({
+  globalData: {
+    showLog: true
+  }
+})
