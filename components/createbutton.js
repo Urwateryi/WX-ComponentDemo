@@ -8,20 +8,20 @@ Component({
   data: {
     showSubBtn: true
   },
-  attached: function() {
+  attached: function () {
     this.setData({
       menu_list: this.data.menu_list
     })
   },
   methods: {
     // 点击新建按钮
-    onCreateTap: function() {
+    onCreateTap: function () {
       this.setData({
         showSubBtn: !this.data.showSubBtn
       })
     },
     // 点击展开的单个按钮
-    onItemTap: function(event) {
+    onItemTap: function (event) {
       var item = event.currentTarget.dataset.item;
       wx.showToast({
         title: "新建" + item.name,

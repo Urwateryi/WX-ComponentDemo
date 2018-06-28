@@ -1,29 +1,11 @@
 {
   "pages":[
-    "pages/home/home",
-    "pages/info/info"
+    "pages/home/home"
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle":"black"
-  },
-  "tabBar": {
-    "list": [
-      {
-        "pagePath": "pages/home/home",
-        "text": "首页"
-      },
-      {
-        "pagePath": "pages/info/info",
-        "text": "资讯"
-      }
-    ],
-    "position":"top",
-    "backgroundColor": "#fff",
-    "borderStyle": "white",
-    "selectedColor": "#fec35a",
-    "color": "#bfbfbf"
   }
 }
