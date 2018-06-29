@@ -1,6 +1,5 @@
 <view>
-  <menu class='menu' menu_list='{{menu_list}}' />
-  <text class='text' >
-    HOME
-  </text>
+  <!-- handleMenu为父组件和自定义组件之间通信的桥梁 -->
+  <menu class='menu' menu_list='{{menu_list}}' bind:handleMenu='handleMenu' />
+  <text class='text'>HOME</text>
 </view>
