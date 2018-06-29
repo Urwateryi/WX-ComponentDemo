@@ -4,10 +4,7 @@
 ## 效果
 做的就是个菜单组件，数据由外部灌入。
 
-但如今还有两个问题还没解决：
-
-- 事件怎么由组件内传到外面页面来
-- 怎么样才能实现菜单弹出的阻尼动画效果
+目前我还在看怎么样才能实现菜单弹出的阻尼动画效果
 
 ![image](https://raw.githubusercontent.com/Urwateryi/MarkDownPic/master/WX-ComponentDemo/%E5%BC%B9%E5%87%BAgif.gif)
 
@@ -17,7 +14,7 @@
 
 ![image](https://raw.githubusercontent.com/Urwateryi/MarkDownPic/master/WX-ComponentDemo/demo%E7%BB%93%E6%9E%84.png)
 
-新建组件menu:
+#### 新建组件menu:
 
 ![image](https://raw.githubusercontent.com/Urwateryi/MarkDownPic/master/WX-ComponentDemo/%E6%96%B0%E5%BB%BAComponent.png)
 
@@ -33,26 +30,33 @@ Component({
   data: {
     showMenu: true
   },
-  
-  attached: function () {
+
+  attached: function() {
     this.setData({
       menu_list: this.data.menu_list
     })
   },
   methods: {
     // 点击新建按钮
-    onCreateTap: function () {
+    onCreateTap: function() {
       this.setData({
         showMenu: !this.data.showMenu
       })
     },
     // 点击展开的单个按钮
-    onItemTap: function (event) {
+    onItemTap: function(event) {
       var item = event.currentTarget.dataset.item;
-      wx.showToast({
-        title: "新建" + item.name,
-        icon: 'none'
-      })
+      // 微信小程序中是通过triggerEvent来给父组件传递信息的
+      //triggerEvent：https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/events.html
+      var menuEventDetail = {
+        item
+      }
+      this.triggerEvent('handleMenu', menuEventDetail)
+      //menuEventOption是触发事件的选项，包括设置事件是否冒泡之类的，不过这里默认是不冒泡的
+      // var menuEventOption = {
+      //   
+      // }
+      // this.triggerEvent('handleMenu', menuEventDetail, menuEventOption)
     }
   }
 })
@@ -63,6 +67,17 @@ Component({
 ![image](https://raw.githubusercontent.com/Urwateryi/MarkDownPic/master/WX-ComponentDemo/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png)
 
 设置数据选择在`attached`方法内。
+
+##### triggerEvent 
+
+[查看文档](https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/events.html)
+
+this.triggerEvent(eventName, eventDetail, eventOption)
+- eventName：事件名称
+- eventDetail：事件传递的对象，是eventName这个事件中detail属性中的内容
+- eventOption：主要定义eventName这个事件是否要冒泡之类的，不过默认的都是false，可以不用设置
+
+![image](https://raw.githubusercontent.com/Urwateryi/MarkDownPic/master/WX-ComponentDemo/%E7%BB%84%E4%BB%B6%E4%BA%8B%E4%BB%B6.png)
 
 还有个关键的地方：（其实最开始创建component的时候就自动生成了）全手打的话，要记得在menu.json里添加自定义组件的声明：
 
@@ -114,16 +129,30 @@ module.exports = {
 ```
 数据在使用的地方引入
 
+#### 组件的使用
+
 home.js
 
 
 ```
 var menuData = require('../../datas/menu-data.js')
+var Logger = require('../../utils/Logger.js')
 
 Page({
   onLoad: function() {
     this.setData({
       menu_list: menuData.menu_list,
+    })
+  },
+  onReady: function() {
+    this.menu = this.selectComponent("#menu");
+  },
+  handleMenu: function(event) {
+    //这里的detail就是在自定义组件中定义的menuEventDetail
+    var item = event.detail.item;
+    Logger.v("item", item);
+    wx.showToast({
+      title: '新建' + item.name,
     })
   }
 })
@@ -133,10 +162,9 @@ home.wxml
 
 ```
 <view>
-  <menu class='menu' menu_list='{{menu_list}}' />
-  <text class='text' >
-    HOME
-  </text>
+  <!-- handleMenu为父组件和自定义组件之间通信的桥梁 -->
+  <menu class='menu' menu_list='{{menu_list}}' bind:handleMenu='handleMenu' />
+  <text class='text'>HOME</text>
 </view>
 ```
 
